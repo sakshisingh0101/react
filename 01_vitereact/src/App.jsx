@@ -39,9 +39,14 @@ import Sakshi from "/workspaces/react/01_vitereact/src/Sakshi.jsx"
 
 // export default App
 function App() 
-{
+{const name="Buddhu";
+  //evaluated javascript expression
+  //basically you cannot use javascript in return argument instead you can only use final evaluated argument bacause art rhe end yeh sab kuch object main convert hoga and usmain koi if else dekha h kya kabhi nhi na phir!!
   return (
+    <>
+    <h1>Hi My name is {name}</h1>
     <Sakshi/>
+    </>
    )
 }
 export default App
