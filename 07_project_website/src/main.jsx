@@ -8,6 +8,9 @@ import Home from './components/home/home.jsx'
 import About from './components/aboutus/aboutUs.jsx'
 import Contact from './components/contactUs/contactUs.jsx'
 import User from './components/user/user.jsx'
+import Github from './components/github/github.jsx'
+
+import { getGitInfo } from './components/github/github.jsx'
 const router=createBrowserRouter([
   {
     path:'/',
@@ -27,6 +30,10 @@ const router=createBrowserRouter([
      {
       path:'user/:userid',
       element:<User/>
+     },
+     {loader:getGitInfo,
+      path:'github',
+      element: <Github/>
      }
     
     ]
@@ -40,7 +47,10 @@ const router=createBrowserRouter([
 //     <Route path='' element={<Home/>}></Route>
 //     <Route path='aboutUs' element={<About/>}></Route>
 //     <Route path='contactUs' element={<Contact/>}></Route>
-//     <Route path='user/userid' element={<User/>}></Route>
+//     <Route path='user/:userid' element={<User/>}></Route>
+//     <Route loader=getGitInfo or ({request})=>{} 
+//path='github'
+// element={<Github/>}></Route>
 //   </Route>
 //   )
 // )
