@@ -1,11 +1,11 @@
 import React,{useState} from 'react'
 
 import { useSelector,useDispatch} from "react-redux";
-import { removeTodo } from "../feature/todo/todoSlice";
+import { removeTodo,isTodoEditable,addTodoId} from "../feature/todo/todoSlice";
 function Todos()
 { const dispatch=useDispatch();
     const todos=useSelector((state)=> state.todos)
-
+    let iseditible=useSelector((state)=>state.isTodoEditable)
     return (
         <>
          <div>Todos</div>
@@ -16,6 +16,14 @@ function Todos()
             key={todo.id}
           >
             <div className='text-white'>{todo.text}</div>
+            <button className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md" 
+            onClick={(e)=>{
+              e.preventDefault()
+              dispatch(isTodoEditable(!iseditible))
+              dispatch(addTodoId(todo.id));
+
+            }}
+            >Edit</button>
             <button
              onClick={() => dispatch(removeTodo(todo.id))}
               className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"

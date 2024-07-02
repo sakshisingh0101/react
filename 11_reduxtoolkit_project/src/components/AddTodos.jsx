@@ -1,13 +1,24 @@
 import React from 'react'
-import {useDispatch} from 'react-redux'
-import { addTodo } from '../feature/todo/todoSlice'
+import {useDispatch, useSelector} from 'react-redux'
+import { addTodo ,addTodoId,isTodoEditable, updateTodo} from '../feature/todo/todoSlice'
 function AddTodos()
 { const [input,setInput]=React.useState('')
     const dispatch=useDispatch()
+    let iseditible=useSelector(state=>state.isTodoEditable)
+    let id=useSelector(state=>state.todoId)
     const addTodoHandler=(e)=>{
         e.preventDefault()
+        if(iseditible)
+          {
+            dispatch(updateTodo({id:id,text:input}))
+            dispatch(isTodoEditable(!iseditible))
+            dispatch(addTodoId(null))
+            setInput('');
+          }
+          else{
         dispatch(addTodo(input))
         setInput('')
+          }
         
     }
     return (
@@ -23,8 +34,9 @@ function AddTodos()
       <button
         type="submit"
         className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+
       >
-        Add Todo
+        {useSelector(state=>state.isTodoEditable)? 'Save':'Add'}
       </button>
     </form>
         </>
