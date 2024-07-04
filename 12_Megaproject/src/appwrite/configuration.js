@@ -77,7 +77,7 @@ export class Service{
             console.log("Appwrute service error:: get document error:: ",error)
         }
     }
-    async getPost()
+    async getPosts()
     {
         try {
             const document=await this.databases.listDocuments(conf.databaseId,conf.collectionId,slug,[
