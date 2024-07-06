@@ -74,7 +74,7 @@ export class Service{
                     return false;
                 }
         } catch (error) {
-            console.log("Appwrute service error:: get document error:: ",error)
+            console.log("Appwrite service error:: get document error:: ",error)
         }
     }
     async getPosts()

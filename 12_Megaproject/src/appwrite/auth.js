@@ -34,7 +34,11 @@ export class AuthService{
       {
         try {
             const session=await this.account.createEmailPasswordSession(email,password)
+            if(session)
+                {
             return session
+                }
+                else{return null}
         } catch (error) {
             throw error
         }
@@ -51,7 +55,9 @@ export class AuthService{
                 return null            }
         } catch (error) {
             // throw error
+
             console.log("Appwrite error:: ",error)
+            
         }
       }
       async logout()
