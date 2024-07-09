@@ -17,7 +17,7 @@ export class Service{
 
     }
     
-    async createPost({title,slug,content,featuredImage,status,userId})
+    async createPost({title,content,featuredImage,slug,status,userId})
     {
         try {
             const document= await this.databases.createDocument(conf.databaseId,conf.collectionId,slug,{title,content,featuredImage,status,userId})
