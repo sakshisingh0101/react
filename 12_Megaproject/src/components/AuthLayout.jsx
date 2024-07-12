@@ -21,7 +21,7 @@ function Protected({children,authentication=true})
 
     
     return (
-        <>  {loader? <h1>loading...</h1>: {children}}
+        <>  {loader? <h1>loading...</h1>: children}
 
         </>
     )

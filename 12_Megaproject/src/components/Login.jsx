@@ -5,6 +5,7 @@ import authservice from '../appwrite/auth'
 import {login as storelogin} from '../store/feature/authSlice'
 import {useDispatch} from 'react-redux'
 import {set, useForm } from 'react-hook-form'
+import Logo from './Logo'
 function Login(){
      const navigate=useNavigate();
      const dispatch =useDispatch();
@@ -67,7 +68,7 @@ function Login(){
                         
                       })}
                />
-               <Button children="Sign Up"
+               <Button children="Login"
                         type='submit'
                         className='w-full'
                        

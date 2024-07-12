@@ -1,14 +1,15 @@
 import React,{useState} from 'react'
 import { Input,Button } from './index'
-import {Link, useNavigate} from 'react-redux'
+import {Link, useNavigate} from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import authservice from '../appwrite/auth'
 import { login as storelogin } from '../store/feature/authSlice'
 import {useDispatch} from 'react-redux'
+import Logo from '../components/Logo'
 function SignUp()
 {  const navigate=useNavigate()
     const dispatch =useDispatch()
-    const [register,handleSubmit]=useForm()
+    const {register,handleSubmit}=useForm()
     const [error , setError]=useState('')
 
     const signup=async (data)=>{
@@ -20,12 +21,13 @@ function SignUp()
                     const userdata=await authservice.getCurrentUser()
                     if(userdata)
                         { dispatch(storelogin(userdata))
-
+                           
                         }
                         navigate('/')
+                    
                 }
         } catch (error) {
-            setError(error)
+            setError(error.message)
         }
     }
     return (

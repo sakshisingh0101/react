@@ -14,7 +14,7 @@ function PostForm({post}){
             slug:post?.slug||'',
             content:post?.content||'',
             status:post?.status||'active',
-            slug:post?.slug||''
+            // slug:post?.slug||''
 
         }
     });
@@ -25,7 +25,7 @@ function PostForm({post}){
             {
                 service.deleteFile(post.featuredImage)
             }
-        const dbpost=await service.updatePost(post.slug,
+        const dbpost=await service.updatePost(post.$id,
         {
             ...data,
             
@@ -34,7 +34,7 @@ function PostForm({post}){
         })
         if(dbpost)
             {
-                navigate(`post/${dbpost.slug}`)
+                navigate(`post/${dbpost.$id}`)
             }
   
     }
@@ -44,7 +44,7 @@ function PostForm({post}){
         {
             const dbpost=await service.createPost({
                 ...data,
-                slug,
+                
                 featuredImage:file? file.$id:undefined,
                 userId:userData.$id
             })
@@ -57,11 +57,11 @@ function PostForm({post}){
     }
    }
    const slugTransform=useCallback((value)=>{
-    if(value&&typeof(value)===string)
+    if(value&&typeof(value)==='string')
         { const slug=value
             .trim()
             .toLowerCase()
-            .replace(/^[a-zA-Z\d\s]+/g,'-')
+            .replace(/[^a-zA-Z\d]+/g,'-')
             .replace(/[\s]/g,'-')
           
             return slug
@@ -82,9 +82,11 @@ function PostForm({post}){
             }
         })
 
-        return ()=>{
+        return ()=>(
+            
             subscription.unsubscribe()
-        }
+            
+     )
 
      },[watch,slugTransform,setValue])
     
@@ -94,19 +96,21 @@ function PostForm({post}){
          <form onSubmit={handleSubmit(submit)} className='flex flex-wrap'>
          <div className="w-2/3 px-2">
          <Input 
-         label='title' 
+         label='Title :' 
          placeholder='title' 
          {...register('title',
          {required:true})}/>
 
-         <Input label='slug'
+         <Input label='Slug :'
                 placeholder='slug'
                 {...register('slug',{required:true})}
                 onInput={(e)=>{
                     setValue('slug',slugTransform(e.currentTarget.value, { shouldValidate: true }))
                 }}
                 />
+        <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
          </div>
+      
          <div className='w-1/3 px-2'>
          <Input label="Featured Image"
                 type='file'
@@ -114,14 +118,7 @@ function PostForm({post}){
                 accept="image/png, image/jpg, image/jpeg, image/gif"
                 {...register('image',{required:!post})}
                  />
-         </div>
-        {post&&( <div className='w-full mb-4' >
-            <img 
-              src={service.getFilePreview(post.featuredImage)} 
-              alt={post.title} 
-              className='rounded-lg'/>
-         </div>)}
-         <Select options={['active','inactive']}
+                  <Select options={['active','inactive']}
                  label='status'
                  className='mb-4'
                  {...register('status',{required:true})}
@@ -129,7 +126,19 @@ function PostForm({post}){
 
          
           />
-          <Button children={post?'update':'submit'}
+         </div>
+       
+        {post&&( <div className='w-full mb-4' >
+            <img 
+              src={service.getFilePreview(post.featuredImage)} 
+              alt={post.title} 
+              className='rounded-lg'/>
+         </div>)}
+        
+
+         
+          
+          <Button children={post?'update':'submit'} className='flex justify-center'
           type='submit'
                   bgcolor={post? 'bg-green-500' : undefined}
 

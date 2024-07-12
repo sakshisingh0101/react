@@ -62,7 +62,7 @@ export class Service{
             
         }
     }
-    async getPost(slug)
+    async getPost({slug})
     {
         try {
             const document=await this.databases.getDocument(conf.databaseId,conf.collectionId,slug)
@@ -80,7 +80,7 @@ export class Service{
     async getPosts()
     {
         try {
-            const document=await this.databases.listDocuments(conf.databaseId,conf.collectionId,slug,[
+            const document=await this.databases.listDocuments(conf.databaseId,conf.collectionId,[
                 Query.equal("status","active")
             ])
            

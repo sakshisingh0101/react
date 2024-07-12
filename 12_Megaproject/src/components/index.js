@@ -12,5 +12,6 @@ import SignUp from "./SignUp";
 import Signup from "../pages/Signup";
 import PostForm from "./postform/PostForm";
 import Protected from "./AuthLayout";
-import Post from './Post'
-export {Header,Footer,Logo,Container,Input,PostCard,Select,Button,RTE,Login,SignUp,Signup,PostForm,Protected,Post}
+
+
+export {Header,Footer,Logo,Container,Input,PostCard,Select,Button,RTE,Login,SignUp,Signup,PostForm,Protected}

@@ -1,6 +1,5 @@
 import { useState ,useEffect} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import {useDispatch} from 'react-redux'
 import { login,logout } from './store/feature/authSlice'
 import './App.css'
@@ -37,7 +36,7 @@ function App() {
           <div className='w-full-block'>
             <Header/>
             <main>
-            TODO  {/* <Outlet/> */}
+             <Outlet/> 
             </main>
             <Footer/>
           </div>

@@ -1,10 +1,10 @@
 import React,{useState} from "react";
-import LogoutBtn from "./logoutbtn";
+import LogoutBtn from "./LogoutBtn";
 import { Container,Logo} from "../index";
 import { Link, useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+
 import {useSelector} from 'react-redux';
-import { logout } from "../../store/feature/authStatus";
+
 function Header()
 {  const authStatus=useSelector((state => state.status))
     const navigate =useNavigate()
@@ -12,7 +12,7 @@ function Header()
         {
             name:'Home',
             slug:'/',
-            active:True
+            active:true
         },
         {
             name:'Login',
@@ -26,7 +26,7 @@ function Header()
         },
         {
             name:'All Posts',
-            slug:'/all-posts',
+            slug:'/all-post',
             active:authStatus
         },
         {
@@ -39,8 +39,8 @@ function Header()
     return (
         <header className="py-3 shadow bg-gray-500"> 
         <Container>
-            <nav>
-                <div className="">
+            <nav className="flex">
+                <div className="mr-4">
                     <Link to="/">
                     <Logo width="70px"/>
                     </Link>
@@ -55,9 +55,9 @@ function Header()
                         </li>
                          :null
                       ))}
-                      {!authStatus?
+                      {authStatus?
                       <li>
-                        <LogoutBtn/>
+                        <LogoutBtn />
                       </li>
                        : null}
                 </ul>
